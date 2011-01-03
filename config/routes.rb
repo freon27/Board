@@ -1,4 +1,6 @@
 Board::Application.routes.draw do
+  resources :resolutions
+
   resources :users
 
   resources :projects

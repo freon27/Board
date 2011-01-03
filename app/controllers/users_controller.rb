@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
-
+    @title = "Sign Up"
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
@@ -41,7 +41,6 @@ class UsersController < ApplicationController
   # POST /users.xml
   def create
     @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }

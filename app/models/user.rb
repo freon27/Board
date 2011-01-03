@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation
   has_many :projects, :class_name => Project.name,
     :foreign_key => "owner"
+  has_many :resolutions, :class_name => Resolution.name,
+    :foreign_key => "owner"
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, :presence   => true,
                     :uniqueness => { :case_sensitive => false },

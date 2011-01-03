@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @resolution.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @resolution.description %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @resolution.owner %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @resolution.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @resolution.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_resolution_path(@resolution) %> |
+<%= link_to 'Back', resolutions_path %>
