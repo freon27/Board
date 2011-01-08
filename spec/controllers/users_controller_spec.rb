@@ -55,6 +55,12 @@ describe UsersController do
         flash[:success].should =~ /Welcome #{ mock_user.name }/i
       end
       
+      it "should sign the user in" do
+        User.stub(:new) { mock_user(:save => true) }
+        post :create, :user => {}
+        controller.should be_signed_in
+      end
+      
       it "redirects to the created user" do
         User.stub(:new) { mock_user(:save => true) }
         post :create, :user => {}
