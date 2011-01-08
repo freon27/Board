@@ -9,9 +9,9 @@ class Resolution < ActiveRecord::Base
   validates_inclusion_of :period, :in => [:weekly, :monthly, :daily, :once]
 
   def date_validate  
-    errors.add_to_base "End date must be in the future" if  end_date && end_date < Date.today
+    errors.add(:base, "End date must be in the future") if  end_date && end_date < Date.today
     if(end_date && start_date && end_date < start_date) 
-      errors.add_to_base "End date must be later than start date"
+      errors.add(:base, "End date must be later than start date")
     end
   end
 end

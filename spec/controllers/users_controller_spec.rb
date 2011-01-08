@@ -49,11 +49,18 @@ describe UsersController do
         assigns(:user).should be(mock_user)
       end
 
+      it "should have a welcome message" do
+        User.stub(:new) { mock_user(:save => true) }
+        post :create, :user => {}
+        flash[:success].should =~ /Welcome #{ mock_user.name }/i
+      end
+      
       it "redirects to the created user" do
         User.stub(:new) { mock_user(:save => true) }
         post :create, :user => {}
         response.should redirect_to(user_url(mock_user))
       end
+      
     end
 
     describe "with invalid params" do
