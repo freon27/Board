@@ -43,6 +43,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save
+        sign_in @user
         format.html { redirect_to(@user, :flash => { :success => "Welcome #{@user.name}" } ) }
         format.xml  { render :xml => @user, :status => :created, :location => @user }
       else

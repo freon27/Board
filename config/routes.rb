@@ -1,10 +1,15 @@
 Board::Application.routes.draw do
+  get "sessions/new"
+  get "pages/home"
+
   resources :resolutions
 
   resources :users
 
   resources :projects
 
+  resources :sessions, :only => [:new, :create, :destroy]
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -54,7 +59,7 @@ Board::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+   root :to => 'pages#home'
 
   # See how all your routes lay out with "rake routes"
 
@@ -62,4 +67,6 @@ Board::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
   match '/signup',  :to => 'users#new'
+  match '/signin',  :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 end
