@@ -13,8 +13,7 @@
   <header>
     <nav class="round">
       <ul>
-        <li><%= link_to "Home", '#' %></li>
-        <li><%= link_to "Help", '#' %></li>
+        <li><%= link_to "Home", root_path %></li>
         <% if signed_in? %>
         <li><%= link_to "Account", current_user %></li>
         <li><%= link_to "Sign out", signout_path, :method => :delete %></li>

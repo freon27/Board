@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  before_filter :authenticate, :only => [:edit, :update, :index]
+  before_filter :correct_user, :only => [:edit, :update]
+  
   # GET /users
   # GET /users.xml
   def index
     @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @users }
@@ -60,7 +62,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(@user, :flash => { :success =>  'User was successfully updated.'  }  ) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -80,4 +82,14 @@ class UsersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
 end
