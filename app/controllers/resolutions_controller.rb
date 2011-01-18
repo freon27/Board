@@ -1,6 +1,10 @@
 class ResolutionsController < ApplicationController
   # GET /resolutions
   # GET /resolutions.xml
+  
+    before_filter :authenticate
+
+  
   def index
     @resolutions = Resolution.all
 
@@ -40,8 +44,9 @@ class ResolutionsController < ApplicationController
   # POST /resolutions
   # POST /resolutions.xml
   def create
-    @resolution = Resolution.new(params[:resolution])
-
+    #@resolution = Resolution.new(params[:resolution])# current_user.resolutions.build(params[:resolution])
+    params[:resolution][:period] and params[:resolution][:period] = params[:resolution][:period].to_sym
+    @resolution = current_user.resolutions.build(params[:resolution])
     respond_to do |format|
       if @resolution.save
         format.html { redirect_to(@resolution, :notice => 'Resolution was successfully created.') }

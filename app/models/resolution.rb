@@ -1,12 +1,15 @@
 class Resolution < ActiveRecord::Base
-  attr_accessible :title, :description, :start_date, :end_date, :period
-  belongs_to :user, :foreign_key => "owner"
+  attr_accessible :title, :description, :start_date, :end_date, :period, :user
+  default_scope :order => 'resolutions.created_at DESC'
+  belongs_to :user
   validates :title, :presence => true
   validates :start_date, :presence => true
   validates :end_date, :presence => true
   validates :period, :presence => true
   validate :date_validate
-  validates_inclusion_of :period, :in => [:weekly, :monthly, :daily, :once]
+  
+  PERIOD_TYPES = [:daily, :weekly, :monthly, :once]
+  validates_inclusion_of :period, :in => PERIOD_TYPES
 
   def date_validate  
     errors.add(:base, "End date must be in the future") if  end_date && end_date < Date.today

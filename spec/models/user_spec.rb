@@ -109,18 +109,29 @@ describe User do
   end
   
   
-  describe "user created" do
+  describe "resolution associations" do
     before(:each) do
-      @user = User.new(:email => "test@test.com", :name => 'David')
+      @user = User.create(@attr)
+      @r1 = Factory(:resolution, :user => @user, :created_at => 1.day.ago)
+      @r2 = Factory(:resolution, :user => @user, :created_at => 1.hour.ago)
     end
-    it "should start with an empty project list" do
-      @user.projects.should be_empty
+    it "should have a resolutions attribute" do
+      @user.should respond_to(:resolutions)
     end
-    it "should allow the user to add a project" do
-      @user.projects.build(:name => 'Project 1')
-      @user.projects.length.should == 1
+    
+    it "should have the right resolutions in the right order" do
+      @user.resolutions.should == [@r2, @r1]
+    end
+    
+    it "should destroy associated resolutions" do
+      @user.destroy
+      [@r1, @r2].each do |resolutions|
+        Resolution.find_by_id(resolutions.id).should be_nil
+      end
     end
   end
+  
+  
   describe "admin attribute" do
 
     before(:each) do

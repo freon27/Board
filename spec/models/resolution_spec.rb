@@ -71,5 +71,25 @@ describe Resolution do
       resolution.period = :biannual
       resolution.should_not be_valid
     end
+    it "Should create with valid options" do
+      resolution = Resolution.create!(@attr)
+    end
+  end
+
+  describe "user associations" do
+
+    before(:each) do
+      @user = Factory(:user)
+      @resolution = @user.resolutions.create!(@attr)
+    end
+
+    it "should have a user attribute" do
+      @resolution.should respond_to(:user)
+    end
+
+    it "should have the right associated user" do
+      @resolution.user_id.should == @user.id
+      @resolution.user.should == @user
+    end
   end
 end

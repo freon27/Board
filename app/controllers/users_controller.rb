@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-
+    @resolutions = @user.resolutions.paginate(:page => params[:page])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -85,9 +85,6 @@ class UsersController < ApplicationController
   end
   
   private
-    def authenticate
-      deny_access unless signed_in?
-    end
     
     def correct_user
       @user = User.find(params[:id])

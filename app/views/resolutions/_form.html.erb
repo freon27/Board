@@ -20,9 +20,9 @@
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :owner %><br />
-    <%= f.text_field :owner %>
-  </div>
+    <%= f.label :period %><br />
+    <%= f.select :period, Resolution::PERIOD_TYPES %>
+  </div>  
   <div class="field">
     <%= f.label :start_date %><br />
     <%= f.date_select :start_date %>

@@ -1,0 +1,8 @@
+<tr>
+  <td class="resolution">
+    <span class="title"><%= link_to(resolution.title, :action => 'show', :controller => 'resolutions', :id => resolution.id ) %></span>
+    <span class="timestamp">
+       <%=  resolution.start_date.to_date.to_s(:long) %>
+    </span>
+  </td>
+</tr>

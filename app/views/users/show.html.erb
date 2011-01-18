@@ -11,5 +11,12 @@
 </p>
 
 
+<% unless @user.resolutions.empty? %>
+  <table class="resolutions" summary="My Resolutions">
+  <%= render @resolutions %>
+  </table>
+  <%= will_paginate @resolutions %>
+<% end %>
+
 <%= link_to 'Edit my profile', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

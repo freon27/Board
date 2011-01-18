@@ -55,10 +55,20 @@ describe UsersController do
   end
 
   describe "GET show" do
+    
     it "assigns the requested user as @user" do
       User.stub(:find).with("37") { mock_user }
       get :show, :id => "37"
       assigns(:user).should be(mock_user)
+    end
+    
+    it "should show the user's resolutions" do
+      @user = Factory(:user)
+      r1 = Factory(:resolution, :user => @user, :title => "Resolution 1")
+      r2 = Factory(:resolution, :user => @user, :title => "Resolution 2")
+      get :show, :id => @user
+      response.should have_selector("a", :href => resolution_path(r1), :content => r1.title)
+      response.should have_selector("a", :href => resolution_path(r2), :content => r2.title)
     end
   end
 

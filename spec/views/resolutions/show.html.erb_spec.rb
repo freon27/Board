@@ -5,7 +5,9 @@ describe "resolutions/show.html.erb" do
     @resolution = assign(:resolution, stub_model(Resolution,
       :title => "Title",
       :description => "MyText",
-      :owner => 1
+      :owner => 1,
+      :start_date => Date.today + 1,
+      :end_date =>  Date.today + 2
     ))
   end
 

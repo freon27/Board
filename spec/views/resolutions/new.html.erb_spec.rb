@@ -16,7 +16,7 @@ describe "resolutions/new.html.erb" do
     assert_select "form", :action => resolutions_path, :method => "post" do
       assert_select "input#resolution_title", :name => "resolution[title]"
       assert_select "textarea#resolution_description", :name => "resolution[description]"
-      assert_select "input#resolution_owner", :name => "resolution[owner]"
+      assert_select "select#resolution_period", :name => "resolution[period]"
     end
   end
 end

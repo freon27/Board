@@ -11,18 +11,13 @@
 </p>
 
 <p>
-  <b>Owner:</b>
-  <%= @resolution.owner %>
-</p>
-
-<p>
   <b>Start date:</b>
-  <%= @resolution.start_date %>
+  <%= @resolution.start_date.to_s(:long) %>
 </p>
 
 <p>
   <b>End date:</b>
-  <%= @resolution.end_date %>
+  <%= @resolution.end_date.to_s(:long) %>
 </p>
 
 
