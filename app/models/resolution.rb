@@ -7,7 +7,7 @@ class Resolution < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :period, :presence => true
   validates :unit, :presence => true
-  validates :period, :presence => true
+  validates :times, :presence => true
   validate :date_validate
   
   PERIOD_TYPES = ['daily', 'weekly', 'monthly', 'once']

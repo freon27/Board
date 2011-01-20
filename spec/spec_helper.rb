@@ -41,4 +41,12 @@ RSpec.configure do |config|
     }
   end
   
+  def test_validates_presence(field)
+    saved_field = @attr.delete(field)
+    resolution = Resolution.new(@attr)
+    resolution.should_not be_valid
+    resolution.send( "#{field.to_s}=".to_sym ,saved_field)
+    resolution.should be_valid
+  end
+  
 end
