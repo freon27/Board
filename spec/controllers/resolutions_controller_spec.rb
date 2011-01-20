@@ -42,13 +42,7 @@ describe ResolutionsController do
       describe "with valid params" do
         
         before(:each) do
-          @attr = {
-            :title => 'test 1',
-            :description => 'blah',
-            :start_date => Date.today + 1,
-            :end_date => Date.today + 2,
-            :period => :weekly
-          }
+          @attr = sample_resolution_attributes
         end
         it " should create a new resolution" do
           lambda do
@@ -58,7 +52,7 @@ describe ResolutionsController do
   
         it "redirects to the created resolution" do
           post :create, :resolution => @attr
-          response.should redirect_to(resolution_url(assigns(:resolution)))
+          response.should redirect_to(user_url(@user))
         end
       end
   

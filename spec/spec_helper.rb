@@ -28,4 +28,17 @@ RSpec.configure do |config|
   def test_sign_in(user)
     controller.sign_in(user)
   end
+  
+  def sample_resolution_attributes
+    return  {
+      :title        => 'Sample resolution 1',
+      :description  => 'This is a sample description',
+      :start_date   => Date.today + 1 ,
+      :end_date     => Date.today + 2,
+      :period       => 'weekly',
+      :unit         => 'hours',
+      :times        => 3
+    }
+  end
+  
 end

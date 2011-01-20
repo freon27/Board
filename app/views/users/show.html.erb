@@ -17,6 +17,7 @@
   </table>
   <%= will_paginate @resolutions %>
 <% end %>
+<%= link_to 'Create new resolution', :action => 'new', :controller => 'resolutions' %> |
 
 <%= link_to 'Edit my profile', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

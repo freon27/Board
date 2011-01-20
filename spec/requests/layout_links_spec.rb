@@ -35,9 +35,5 @@ describe "LayoutLinks" do
       response.should have_selector("a", :href => user_path(@user),
                                          :content => "Account")
     end
-
-    it "should have a profile link" do
-      
-    end
   end
 end

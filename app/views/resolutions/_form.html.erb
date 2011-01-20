@@ -22,6 +22,14 @@
   <div class="field">
     <%= f.label :period %><br />
     <%= f.select :period, Resolution::PERIOD_TYPES %>
+  </div>
+  <div class="field">
+    <%= f.label :unit %><br />
+    <%= f.select :unit, Resolution::UNIT_TYPES %>
+  </div>
+  <div class="field">
+    <%= f.label :times %><br />
+    <%= f.text_field :times %>
   </div>  
   <div class="field">
     <%= f.label :start_date %><br />

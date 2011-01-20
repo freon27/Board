@@ -3,13 +3,7 @@ require 'date'
 
 describe Resolution do
   before(:each) do
-    @attr = {
-      :title => 'Sample resolution 1',
-      :description => 'This is a sample description',
-      :start_date => Date.today + 1 ,
-      :end_date => Date.today + 2,
-      :period => :weekly
-    }
+    @attr = sample_resolution_attributes
   end
   describe "creation" do
     it "Should not be valid without a title" do
@@ -48,29 +42,47 @@ describe Resolution do
       resolution.end_date = Date.today + 2
       resolution.should be_valid
     end
-    it "should not be valid without period" do
-      @attr.delete(:period)
+    it "should not be valid without a unit" do
+      unit = @attr.delete(:unit)
       resolution = Resolution.new(@attr)
       resolution.should_not be_valid
-      resolution.period = :weekly
+      resolution.unit = unit
       resolution.should be_valid
     end
-    it "should only be valid with an accepted period value" do
-      period_values = [
-        :daily,
-        :weekly,
-        :monthly,
-        :once
-      ]
+    it "should not be valid without unit being in the list" do
       resolution = Resolution.new(@attr)
       resolution.should be_valid
-      period_values.each do | period |
+      Resolution::UNIT_TYPES.each do | unit |
+        resolution.unit = unit
+        resolution.should be_valid
+      end
+      resolution.unit = 'banana'
+      resolution.should_not be_valid
+    end
+    it "should not be valid without period" do
+      period = @attr.delete(:period)
+      resolution = Resolution.new(@attr)
+      resolution.should_not be_valid
+      resolution.period = period
+      resolution.should be_valid
+    end
+    it "should only be valid with an accepted period value" do    
+      resolution = Resolution.new(@attr)
+      resolution.should be_valid
+      Resolution::PERIOD_TYPES.each do | period |
         resolution.period = period
         resolution.should be_valid
       end
-      resolution.period = :biannual
+      resolution.period = 'banana'
       resolution.should_not be_valid
     end
+    it "should not be valid without a unit" do
+      unit = @attr.delete(:unit)      
+      resolution = Resolution.new(@attr)
+      resolution.should_not be_valid
+      resolution.unit = unit
+      resolution.should be_valid
+    end    
     it "Should create with valid options" do
       resolution = Resolution.create!(@attr)
     end

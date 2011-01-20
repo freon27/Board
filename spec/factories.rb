@@ -13,6 +13,8 @@ Factory.define :resolution do |resolution|
   resolution.title        "Test resolution"
   resolution.start_date   Date.today + 1
   resolution.end_date     Date.today + 2
-  resolution.period       :weekly
+  resolution.period       'weekly'
   resolution.association  :user
+  resolution.unit         'hours'
+  resolution.times        3
 end

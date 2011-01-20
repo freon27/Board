@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110115125155) do
+ActiveRecord::Schema.define(:version => 20110120074054) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20110115125155) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "period"
+    t.string   "unit"
+    t.integer  "times"
   end
 
   add_index "resolutions", ["user_id"], :name => "index_resolutions_on_owner"

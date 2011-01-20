@@ -36,7 +36,9 @@ describe "Resolutions" do
           :resolution_end_date_1i    => 2011,
           :resolution_end_date_2i    => 07,
           :resolution_end_date_3i    => 16,
-          :period                    => :daily
+          :period                    => 'daily',
+          :unit                      => 'hours',
+          :times                     => 3
         }
         lambda do
           visit '/resolutions/new'
@@ -44,7 +46,7 @@ describe "Resolutions" do
               fill_in key, :with => value
             end
           click_button
-          response.should have_selector("p", :content => @attr[:title])
+          response.should have_selector("a", :content => @attr[:title])
         end.should change(Resolution, :count).by(1)
       end
     end
