@@ -32,7 +32,7 @@ describe "LayoutLinks" do
     
     it "should have an Account link" do
       visit root_path
-      response.should have_selector("a", :href => user_path(@user),
+      response.should have_selector("a", :href => edit_user_path(@user),
                                          :content => "Account")
     end
   end

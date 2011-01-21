@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110120074054) do
+ActiveRecord::Schema.define(:version => 20110121105802) do
 
   create_table "projects", :force => true do |t|
     t.string   "name"
@@ -22,15 +22,14 @@ ActiveRecord::Schema.define(:version => 20110120074054) do
 
   create_table "resolutions", :force => true do |t|
     t.string   "title"
-    t.text     "description"
     t.integer  "user_id"
     t.date     "start_date"
-    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "period"
     t.string   "unit"
     t.integer  "times"
+    t.integer  "repetitions"
   end
 
   add_index "resolutions", ["user_id"], :name => "index_resolutions_on_owner"

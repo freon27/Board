@@ -12,22 +12,14 @@ describe Resolution do
     it "should not be valid without a start date" do
       test_validates_presence(:start_date)
     end
-    it "should not be valid without an end date" do
-      test_validates_presence(:end_date)
+    it "should not be valid without a number of repetitions" do
+      test_validates_presence(:repetitions)
     end
-    it "should have an end date that's in the future" do
-      @attr[:end_date] = Date.new(1909, 1, 1)
+    it "should have an start date that's in the future" do
+      @attr[:start_date] = Date.today - 2
       resolution = Resolution.new(@attr)
       resolution.should_not be_valid
-      resolution.end_date = Date.new(2099, 12, 22)
-      resolution.should be_valid
-    end
-    it "should have an end date that's later than the start date" do
-      @attr[:start_date] = Date.today + 2
-      @attr[:end_date] = Date.today + 1
-      resolution = Resolution.new(@attr)
-      resolution.should_not be_valid
-      resolution.end_date = Date.today + 2
+      resolution.start_date = Date.today + 2
       resolution.should be_valid
     end
     it "should not be valid without a unit" do
@@ -59,9 +51,28 @@ describe Resolution do
     it "should not be valid without a number of times" do
       test_validates_presence(:times)
     end
-    pending "number of times must be a non negative number" do
-      #test_validates_presence(:times)
+    it "number of times must be a non negative number" do
+      resolution = Resolution.new(@attr)
+      resolution.times = 'dave'
+      resolution.should_not be_valid
+      resolution.times = -1
+      resolution.should_not be_valid
+      resolution.times = 0
+      resolution.should_not be_valid
+      resolution.times = 1
+      resolution.should be_valid
     end    
+    it "repetitions must be a non negative number" do
+      resolution = Resolution.new(@attr)
+      resolution.repetitions = 'dave'
+      resolution.should_not be_valid
+      resolution.repetitions = -1
+      resolution.should_not be_valid
+      resolution.repetitions = 0
+      resolution.should_not be_valid
+      resolution.repetitions = 1
+      resolution.should be_valid
+    end   
     it "Should create with valid options" do
       resolution = Resolution.create!(@attr)
     end

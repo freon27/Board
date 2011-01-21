@@ -16,7 +16,7 @@ describe "Resolutions" do
       it "should not make a new resolution" do
         lambda do
           visit '/resolutions/new'
-          #fill_in :resolution_content, :with => ""
+          fill_in 'resolution_title', :with => ""
           click_button
           response.should render_template('resolutions/new')
           response.should have_selector("div#error_explanation")
@@ -28,17 +28,14 @@ describe "Resolutions" do
 
       it "should make a new resolution" do
         @attr = {
-          :title                     => 'test title',
-          :description               => 'blash',
-          :resolution_start_date_1i  => 2011,
-          :resolution_start_date_2i  => 07,
-          :resolution_start_date_3i  => 11,
-          :resolution_end_date_1i    => 2011,
-          :resolution_end_date_2i    => 07,
-          :resolution_end_date_3i    => 16,
-          :period                    => 'daily',
-          :unit                      => 'hours',
-          :times                     => 3
+          'resolution_title'          => 'test title',
+          'resolution_start_date_1i'  => 2011,
+          'resolution_start_date_2i'  => 07,
+          'resolution_start_date_3i'  => 11,
+          'resolution_repetitions'    => 3,
+          'resolution_period'         => 'day',
+          'resolution_unit'           => 'hours',
+          'resolution_times'          => 3
         }
         lambda do
           visit '/resolutions/new'

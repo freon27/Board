@@ -10,36 +10,17 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :period %><br />
-    <%= f.select :period, Resolution::PERIOD_TYPES %>
-  </div>
-  <div class="field">
-    <%= f.label :unit %><br />
-    <%= f.select :unit, Resolution::UNIT_TYPES %>
-  </div>
-  <div class="field">
-    <%= f.label :times %><br />
-    <%= f.text_field :times %>
-  </div>  
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
-  </div>
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+  <%= f.label :title, "I need to " %>
+  <%= f.text_field :title, :value => 'do something...' %>
+  <%= f.text_field :times, :value => "1", :maxlength => 2 %> 
+  <%= f.select :unit, Resolution::UNIT_TYPES %>
+  <%= f.label :period, ' per ' %>
+  <%= f.select :period, Resolution::PERIOD_TYPES %>
+  <%= f.label :repetitions, 'for the next' %>
+  <%= f.text_field :repetitions, :value => "1", :maxlength => 3 %>
+  <%= f.label :start_date, 'starting from' %>
+  <%= f.date_select :start_date %>
+  <%= f.submit %>
   </div>
 <% end %>

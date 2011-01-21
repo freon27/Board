@@ -1,23 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<h3>
+  Hi <%= @user.name %>
+</h3>
 
 
-<% unless @user.resolutions.empty? %>
+<% if @user.resolutions.empty? %>
+  <p>
+    You have no resolutions. <%= link_to 'Make some!', :action => 'new', :controller => 'resolutions' %>
+  </p>
+<% else %>
   <table class="resolutions" summary="My Resolutions">
   <%= render @resolutions %>
   </table>
   <%= will_paginate @resolutions %>
+  <%= link_to 'Create new resolution', :action => 'new', :controller => 'resolutions' %>
 <% end %>
-<%= link_to 'Create new resolution', :action => 'new', :controller => 'resolutions' %> |
 
-<%= link_to 'Edit my profile', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+

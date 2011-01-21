@@ -34,8 +34,8 @@ RSpec.configure do |config|
       :title        => 'Sample resolution 1',
       :description  => 'This is a sample description',
       :start_date   => Date.today + 1 ,
-      :end_date     => Date.today + 2,
-      :period       => 'weekly',
+      :repetitions  => 3,
+      :period       => 'week',
       :unit         => 'hours',
       :times        => 3
     }
