@@ -18,3 +18,10 @@ Factory.define :resolution do |resolution|
   resolution.unit         'hours'
   resolution.times        3
 end
+
+Factory.define :resolution_result do |resolution_result|
+  resolution_result.times_completed   0
+  resolution_result.start_date        Date.today + 1
+  resolution_result.end_date          Date.today + 8
+end
+

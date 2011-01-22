@@ -40,6 +40,14 @@ RSpec.configure do |config|
       :times        => 3
     }
   end
+
+  def sample_resolution_result_attributes
+    return  {
+      :start_date       => Date.today + 1 ,
+      :end_date         => Date.today + 2 ,
+      :times_completed  => 3
+    }
+  end
   
   def test_validates_presence(field)
     saved_field = @attr.delete(field)

@@ -2,10 +2,12 @@ require 'spec_helper'
 require 'date'
 
 describe Resolution do
+
   before(:each) do
     @attr = sample_resolution_attributes
   end
   describe "creation" do
+
     it "Should not be valid without a title" do
       test_validates_presence(:title)
     end
@@ -77,9 +79,83 @@ describe Resolution do
       resolution = Resolution.create!(@attr)
     end
   end
-
+  
+  
+  describe "creation of results" do          
+    it "should create the name number of results as repetitions required" do
+      @resolution = Factory(:resolution)
+      @resolution.resolution_results.length.should == 3
+    end
+    it "should have a first result with its own start date" do
+      @resolution = Factory(:resolution)
+      @resolution.resolution_results[0].start_date.should == @resolution.start_date
+    end
+    describe "daily resolutions" do
+      before(:each) do
+        @resolution = Factory(:resolution, :period => 'day')
+      end
+      it "should create results with the same start and end date" do
+        @resolution.resolution_results.each do |result |
+          result.start_date.should == result.end_date
+        end 
+      end
+      it "the last result's start date should be 'repetitions' days later" do
+        last_start_date = @resolution.resolution_results.last.start_date
+        days_difference = (last_start_date - @resolution.start_date).to_i
+        days_difference.should == @resolution.repetitions - 1
+      end
+    end
+    describe "weekly resolutions" do
+      before(:each) do
+        @resolution = Factory(:resolution, :period => 'week')
+      end
+      it "should create results with the start and end date 6 days apart" do
+        @resolution.resolution_results.each do |result |
+          result.end_date.should == result.start_date + 6
+        end 
+      end
+      it "the last result's start date should be 'repetitions' weeks later" do
+        last_start_date = @resolution.resolution_results.last.start_date
+        days_difference = (last_start_date - @resolution.start_date).to_i
+        (@resolution.repetitions - 1).should == days_difference / 7
+      end
+    end
+    describe "monthly resolutions" do
+      before(:each) do
+        @resolution = Factory(:resolution, :period => 'month')
+      end
+      it "should create results with the start and end date 1 calendar month - 1 day apart" do
+        @resolution.resolution_results.each do |result |
+          result.end_date.should == (result.start_date >> 1) - 1
+        end 
+      end
+      pending "how else to we test a month?" do
+        
+      end
+    end
+    describe "quarterly resolutions" do
+      before(:each) do
+        @resolution = Factory(:resolution, :period => 'quarter')
+      end
+      it "should create results with the start and end date 3 calendar months - 1 day apart" do
+        @resolution.resolution_results.each do |result |
+          result.end_date.should == (result.start_date >> 3) - 1
+        end 
+      end
+    end
+    describe "year resolutions" do
+      before(:each) do
+        @resolution = Factory(:resolution, :period => 'year')
+      end
+      it "should create results with the start and end date 1 year - 1 day apart" do
+        @resolution.resolution_results.each do |result |
+          result.end_date.should == (result.start_date >> 12) - 1
+        end 
+      end
+    end    
+  end
+  
   describe "user associations" do
-
     before(:each) do
       @user = Factory(:user)
       @resolution = @user.resolutions.create!(@attr)
