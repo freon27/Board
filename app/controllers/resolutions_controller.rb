@@ -19,6 +19,7 @@ class ResolutionsController < ApplicationController
   def show
     @resolution = Resolution.find(params[:id])
     @user = current_user
+    @resolution_results = @resolution.resolution_results.where("start_date <= ?", Date.today ).paginate(:page => params[:page])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @resolution }

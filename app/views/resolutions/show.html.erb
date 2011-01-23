@@ -1,20 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @resolution.title %>
-</p>
-
-<p>
-  <b>Start date:</b>
-  <%= @resolution.start_date.to_s(:long) %>
-</p>
-
-<p>
-  <b>Repetitions:</b>
-  <%= @resolution.repetitions %>
+  <%= @resolution.title %> <%= @resolution.repetitions %> times per <%= @resolution.period %> from <%= @resolution.start_date.to_s(:long) %> for <%= pluralize(@resolution.repetitions, @resolution.period)  %>
 </p>
 
 
-<%= link_to 'Edit', edit_resolution_path(@resolution) %> |
+  
+
+<ul>
+  <% for result in @resolution_results %>
+  <li><%= result.start_date %> - <%= result.end_date %> <strong>Completed <%= result.times_completed %> out of <%= @resolution.times %></strong></li>
+  <% end %>  
+</ul>
+
+
+<%= link_to 'Edit', edit_resolution_path(@resolution) %> | <%= link_to 'Delete', @resolution, :confirm => 'Are you sure?', :method => :delete  %> |
 <%= link_to 'Back', @user %>

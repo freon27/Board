@@ -9,7 +9,6 @@ class CreateResolutions < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :resolutions, :owner 
   end
 
   def self.down

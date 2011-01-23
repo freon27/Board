@@ -13,11 +13,39 @@ describe ResolutionsController do
     before(:each) do
       @user = test_sign_in(Factory(:user))
     end
+    
+    describe "checking correct user" do
+
+      pending "should require user to be owner for 'show'" do
+        get :show, :id => @user
+        response.should redirect_to(root_path)
+      end
+    
+      pending "should require user to be owner for 'edit'" do
+        get :edit, :id => @user
+        response.should redirect_to(root_path)
+      end
+
+      pending "should require user to be owner 'update'" do
+        put :update, :id => @user, :user => {}
+        response.should redirect_to(root_path)
+      end
+
+    end
     describe "GET show" do
       it "assigns the requested resolution as @resolution" do
         Resolution.stub(:find).with("37") { mock_resolution }
         get :show, :id => "37"
         assigns(:resolution).should be(mock_resolution)
+      end
+      pending "should show a paginated list of resolution results" do
+        
+      end
+      pending "should show a form for the current result period" do
+        
+      end
+      pending "should only show resolution results where the start date has passed" do
+        # TODO or should we 
       end
     end
   
@@ -121,6 +149,7 @@ describe ResolutionsController do
         response.should redirect_to(resolutions_url)
       end
     end
+    
   end
   
   describe "For non signed in users" do
