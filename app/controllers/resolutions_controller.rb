@@ -84,7 +84,7 @@ class ResolutionsController < ApplicationController
     @resolution.destroy
     @user = current_user
     respond_to do |format|
-      format.html { redirect_to(resolutions_url) }
+      format.html { redirect_to(@user) }
       format.xml  { head :ok }
     end
   end

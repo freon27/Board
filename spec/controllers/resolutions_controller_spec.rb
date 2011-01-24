@@ -143,10 +143,10 @@ describe ResolutionsController do
         delete :destroy, :id => "37"
       end
   
-      it "redirects to the resolutions list" do
+      it "redirects to the user page" do
         Resolution.stub(:find) { mock_resolution }
         delete :destroy, :id => "1"
-        response.should redirect_to(resolutions_url)
+        response.should redirect_to(user_path(@user))
       end
     end
     

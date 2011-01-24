@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= @resolution.title %> <%= @resolution.repetitions %> times per <%= @resolution.period %> from <%= @resolution.start_date.to_s(:long) %> for <%= pluralize(@resolution.repetitions, @resolution.period)  %>
+  <%= @resolution.title %> <%= @resolution.times %> times per <%= @resolution.period %> from <%= @resolution.start_date.to_s(:long) %> for <%= pluralize(@resolution.repetitions, @resolution.period)  %>
 </p>
 
 
