@@ -1,0 +1,60 @@
+
+.container {
+    width: 710px;
+    font-family: "Tahoma", "Arial", "Verdana", sans-serif;
+    background-color: white;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+h1.logo {
+    background-image: url(/images/resolute.png);
+    text-indent: -2000px;
+    background-repeat: no-repeat;
+    height: 70px;
+}
+
+body {
+    background-color: #dde5e1;
+}
+
+.rounded-corners {
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+
+input, select {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;    
+}
+
+nav {
+  float: right;
+}
+
+ul {
+    list-style: none;    
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+hr.separator {
+    background-color: #ffd1d1;
+}
+
+
+section {
+    padding-left: 20px;
+}
+
+footer {
+    margin-top: 5px;
+}
+
