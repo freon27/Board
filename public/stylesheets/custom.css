@@ -58,3 +58,7 @@ footer {
     margin-top: 5px;
 }
 
+p.central {
+    width: 500px;
+    margin: auto;
+}
