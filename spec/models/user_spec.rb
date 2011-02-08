@@ -4,7 +4,7 @@ describe User do
 
   before(:each) do
     @attr = {
-      :email                  => "test@test.com",
+      :email                  => "test1@test.com",
       :name                   => 'David',
       :password               => 'password1',
       :password_confirmation  => 'password1'
@@ -16,7 +16,7 @@ describe User do
       @attr.delete(:email)
       @user = User.new(@attr)
       @user.should_not be_valid
-      @user.email = 'test@test.com'
+      @user.email = 'test1@test.com'
       @user.should be_valid
     end
     it "should not be valid without a name" do
@@ -37,10 +37,10 @@ describe User do
       @attr[:email] = "Some Internal : Email Format"
       @user = User.new(@attr)
       @user.should_not be_valid
-      @user.email = 'test@test.com'
+      @user.email = 'test1@test.com'
       @user.should be_valid
     end
-    pending "should require a unique email address" do
+    it "should require a unique email address" do
       upcased_email = @attr[:email].upcase
       User.create(@attr.merge(:email => upcased_email))
       user_with_duplicate_email = User.new(@attr)

@@ -3,6 +3,8 @@ Board::Application.routes.draw do
   get "pages/home"
 
   resources :resolutions
+  
+  resources :resolution_results, :only => [:update]
 
   resources :users
 

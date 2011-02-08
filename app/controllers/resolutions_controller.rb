@@ -3,16 +3,16 @@ class ResolutionsController < ApplicationController
   # GET /resolutions.xml
   
   before_filter :authenticate
-
+  before_filter :user_is_owner, :only => [:show, :edit, :update, :destroy]
   
-  def index
-    @resolutions = Resolution.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @resolutions }
-    end
-  end
+  #def index
+  #  @resolutions = Resolution.all
+  #
+  #  respond_to do |format|
+  #    format.html # index.html.erb
+  #    format.xml  { render :xml => @resolutions }
+  #  end
+  #end
 
   # GET /resolutions/1
   # GET /resolutions/1.xml
@@ -88,4 +88,11 @@ class ResolutionsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  private
+    
+    def user_is_owner
+      resolution = Resolution.find(params[:id])
+      redirect_to(root_path) unless current_user?(resolution.user)
+    end
 end

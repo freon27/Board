@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe "Resolutions" do
   before(:each) do
-    user = Factory(:user)
+    #user = Factory(:user)
+    @resolution = Factory(:resolution)
+    user = @resolution.user
     visit signin_path
     fill_in :email,    :with => user.email
     fill_in :password, :with => user.password
@@ -47,5 +49,9 @@ describe "Resolutions" do
         end.should change(Resolution, :count).by(1)
       end
     end
+  end
+  
+  describe "deletion" do
+   # visit '/resolutions/new'
   end
 end
