@@ -13,7 +13,6 @@ class Resolution < ActiveRecord::Base
   validates :times, :presence => true
   validates_numericality_of :times, :greater_than => 0
   validates_numericality_of :repetitions, :greater_than => 0
-  validate :date_validate
   
   after_create :create_results
   
@@ -22,10 +21,6 @@ class Resolution < ActiveRecord::Base
 
   UNIT_TYPES = ['times', 'hours']
   validates_inclusion_of :unit, :in => UNIT_TYPES
-
-  def date_validate
-    errors.add(:base, "Start date cannot be in the past") if  start_date && start_date < Date.today
-  end
   
   def create_results
     period_start_date = self.start_date
@@ -56,7 +51,6 @@ class Resolution < ActiveRecord::Base
       else
         # TODO add exception for unknown period
       end
-     
     end
     
 end

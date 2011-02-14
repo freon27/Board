@@ -17,13 +17,7 @@ describe Resolution do
     it "should not be valid without a number of repetitions" do
       test_validates_presence(:repetitions)
     end
-    it "should have an start date that's in the future" do
-      @attr[:start_date] = Date.today - 2
-      resolution = Resolution.new(@attr)
-      resolution.should_not be_valid
-      resolution.start_date = Date.today + 2
-      resolution.should be_valid
-    end
+      
     it "should not be valid without a unit" do
       test_validates_presence(:unit)
     end
@@ -88,7 +82,7 @@ describe Resolution do
     end
     it "should have a first result with its own start date" do
       @resolution = Factory(:resolution)
-      @resolution.resolution_results[0].start_date.should == @resolution.start_date
+      @resolution.resolution_results.last.start_date.should == @resolution.start_date
     end
     describe "daily resolutions" do
       before(:each) do
@@ -99,8 +93,8 @@ describe Resolution do
           result.start_date.should == result.end_date
         end 
       end
-      it "the last result's start date should be 'repetitions' days later" do
-        last_start_date = @resolution.resolution_results.last.start_date
+      it "the first result's start date should be 'repetitions' days later" do
+        last_start_date = @resolution.resolution_results.first.start_date
         days_difference = (last_start_date - @resolution.start_date).to_i
         days_difference.should == @resolution.repetitions - 1
       end
@@ -115,7 +109,7 @@ describe Resolution do
         end 
       end
       it "the last result's start date should be 'repetitions' weeks later" do
-        last_start_date = @resolution.resolution_results.last.start_date
+        last_start_date = @resolution.resolution_results.first.start_date
         days_difference = (last_start_date - @resolution.start_date).to_i
         (@resolution.repetitions - 1).should == days_difference / 7
       end
@@ -153,6 +147,12 @@ describe Resolution do
         end 
       end
     end    
+  end
+  
+  describe "updating" do
+    pending "it should update the associated results" do
+      
+    end
   end
   
   describe "user associations" do

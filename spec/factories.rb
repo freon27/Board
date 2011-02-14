@@ -12,12 +12,12 @@ end
 
 Factory.define :resolution do |resolution|
   resolution.title        "Test resolution"
-  resolution.start_date   Date.today + 1
+  resolution.start_date   Date.today - 28
   resolution.repetitions  3
   resolution.period       'week'
   resolution.unit         'hours'
   resolution.times        3
-  resolution.association :user#, :email => Factory.next(:email)
+  resolution.association :user
 end
 
 Factory.define :resolution_result do |resolution_result|

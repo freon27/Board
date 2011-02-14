@@ -57,4 +57,19 @@ describe ResolutionResult do
       @resolution_result.resolution.should == @resolution
     end
   end
+  describe "current?" do
+    before(:each) do
+      @resolution_result = Factory(:resolution_result)
+    end
+    it "should return true if the time period spans the current date" do
+      @resolution_result.start_date = Date.today - 1
+      @resolution_result.end_date = Date.today + 1
+      @resolution_result.current?.should == true
+    end
+    it "should return false if the time period does not span the current date" do
+        @resolution_result.start_date = Date.today + 2 
+        @resolution_result.end_date = Date.today + 9
+        @resolution_result.current?.should == false
+    end
+  end
 end

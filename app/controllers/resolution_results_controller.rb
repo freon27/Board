@@ -9,6 +9,12 @@ class ResolutionResultsController < ApplicationController
     @resolution_result.save
     redirect_to(@resolution_result.resolution)
   end
+  
+  def edit
+    logger.debug params[:id]
+    @result = ResolutionResult.find(params[:id])
+    @resolution = @result.resolution
+  end
 
   private
     

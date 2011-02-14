@@ -1,17 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <%= @resolution.title.capitalize %> <%= @resolution.times %> times per <%= @resolution.period %> from <%= @resolution.start_date.to_s(:long) %> for <%= pluralize(@resolution.repetitions, @resolution.period)  %>
 </p>
 
-
-  
+<p>
+  <% if @resolution.repetitions == @time_periods_passed %>Resolution ended: <% else %><%= pluralize(@time_periods_passed, @resolution.period) %> in:<% end %> <%= pluralize(@times_completed, 'time') %> out of <%= @times_required %> completed (<%= @percentage_completed %>%).
+</p>
 
 <ul>
-  <% for result in @resolution_results %>
-  <li><em><%= result.start_date %> - <%= result.end_date %></em> - Completed <%= result.times_completed %> out of <%= @resolution.times %></li>
+  <% for @result in @resolution_results %>
+    <% if @result.current? %>
+      <%= render 'shared/resolution_result_form'  %>  
+    <% else %>
+      <li><em><%= @result.start_date %> - <%= @result.end_date %></em> - Completed <%= @result.times_completed %> out of <%= @resolution.times %> - <%= link_to 'edit', edit_resolution_result_path(@result) %></li>
+    <% end %>
   <% end %>  
 </ul>
+  
 
 
 <%= link_to 'Edit', edit_resolution_path(@resolution) %> | <%= link_to 'Delete', @resolution, :confirm => 'Are you sure?', :method => :delete  %> |

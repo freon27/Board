@@ -41,17 +41,31 @@ describe ResolutionsController do
         @resolution = Factory(:resolution)
         @user = @resolution.user
         test_sign_in(@user)
+        @resolution.resolution_results.each do | r |
+          r.times_completed = 2
+          r.save!
+        end
       end
       
       describe "GET show" do
         pending "should show a paginated list of resolution results" do
           
         end
-        pending "should show a form for the current result period" do
-          
+        it "should assign the percentage of time periods that have passed" do
+          get :show, :id => @resolution
+          assigns[:time_periods_passed].should == 3
         end
-        pending "should only show resolution results where the start date has passed" do
-          # TODO or should we 
+        it "should assign the number of tasks that should have been completed" do
+          get :show, :id => @resolution
+          assigns[:times_required].should == 9
+        end
+        it "should assign the number of times the task was completed" do
+          get :show, :id => @resolution
+          assigns[:times_completed].should == 6
+        end
+        it "should assign percentage of tasks that have been completed" do
+          get :show, :id => @resolution
+          assigns[:percentage_completed].should == 66
         end
       end
     

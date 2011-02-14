@@ -3,7 +3,7 @@ class ResolutionsController < ApplicationController
   # GET /resolutions.xml
   
   before_filter :authenticate
-  before_filter :user_is_owner, :only => [:show, :edit, :update, :destroy]
+  before_filter :user_is_owner, :only => [:show, :edit, :update, :destroy, :record_results]
   
   #def index
   #  @resolutions = Resolution.all
@@ -20,6 +20,18 @@ class ResolutionsController < ApplicationController
     @resolution = Resolution.find(params[:id])
     @user = current_user
     @resolution_results = @resolution.resolution_results.where("start_date <= ?", Date.today ).paginate(:page => params[:page])
+    @resolution_results.each do |t|
+      logger.debug t.end_date
+    end
+    @time_periods_passed = @resolution_results.length
+    @times_completed = @resolution_results.map { |p| p.times_completed }.sum
+    @times_required = @time_periods_passed * @resolution.times
+    
+    if (@times_required) == 0
+      @percentage_completed = 0
+    else 
+      @percentage_completed = (@times_completed.to_f / @times_required.to_f * 100).to_i
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @resolution }

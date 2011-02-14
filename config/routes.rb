@@ -2,9 +2,9 @@ Board::Application.routes.draw do
   get "sessions/new"
   get "pages/home"
 
-  resources :resolutions
-  
-  resources :resolution_results, :only => [:update]
+  resources :resolutions 
+
+  resources :resolution_results, :only => [:edit, :update]
 
   resources :users
 

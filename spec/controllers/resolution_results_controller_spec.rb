@@ -29,17 +29,22 @@ describe ResolutionResultsController do
       before(:each) do
         test_sign_in(@resolution_result.resolution.user)
       end
-      describe "with valid params" do
-        it "updates the requested resolution result" do
-          put :update, :id => @resolution_result, :resolution_result => { 'times_completed' => 2 }
-          @resolution_result.reload
-          @resolution_result.times_completed.should == 2
+      describe "update" do
+        describe "with valid params" do
+          it "updates the requested resolution result" do
+            put :update, :id => @resolution_result, :resolution_result => { 'times_completed' => 2 }
+            @resolution_result.reload
+            @resolution_result.times_completed.should == 2
+          end
+        
+          it "redirects to the resolution" do
+            put :update, :id => @resolution_result, :resolution_result => { 'times_completed' => 2 }
+            response.should redirect_to(@resolution_result.resolution)
+          end
         end
-      
-        it "redirects to the resolution" do
-          put :update, :id => @resolution_result, :resolution_result => { 'times_completed' => 2 }
-          response.should redirect_to(@resolution_result.resolution)
-        end
+      end
+      pending "edit" do
+        
       end
     end
   end
