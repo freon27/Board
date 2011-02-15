@@ -1,10 +1,17 @@
 
 .container {
     width: 710px;
-    font-family: "Tahoma", "Arial", "Verdana", sans-serif;
+    font-family: "Courier", "Tahoma", "Arial", "Verdana", sans-serif;
     background-color: white;
     margin-top: 20px;
     padding: 20px;
+    background-image: url(/images/white_paper.jpg);
+}
+
+.shadow {
+    -moz-box-shadow: 3px 3px 4px #a9afac;
+    -webkit-box-shadow: 3px 3px 4px #a9afac;
+    box-shadow: 3px 3px 4px #a9afac;
 }
 
 h1.logo {
@@ -16,6 +23,7 @@ h1.logo {
 
 body {
     background-color: #dde5e1;
+
 }
 
 .rounded-corners {

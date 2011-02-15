@@ -12,7 +12,7 @@
 <ul>
   <% for @result in @resolution_results %>
     <% if @result.current? %>
-      <%= render 'shared/resolution_result_form'  %>  
+      <li><%= render 'shared/resolution_result_form'  %></li>
     <% else %>
       <li><em><%= @result.start_date %> - <%= @result.end_date %></em> - Completed <%= @result.times_completed %> out of <%= @resolution.times %> - <%= link_to 'edit', edit_resolution_result_path(@result) %></li>
     <% end %>
