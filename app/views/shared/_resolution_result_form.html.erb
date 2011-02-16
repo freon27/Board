@@ -1,4 +1,4 @@
 <%= form_for(@result) do |t|  %>
-  <em><%= @result.start_date %> - <%= @result.end_date %></em> - Completed <%= t.text_field :times_completed, :value => @result.times_completed, :maxlength => 3 %> out of <%= @resolution.times %>
+  <%= @result.start_date %> - <%= @result.end_date %> - Completed <%= t.text_field :times_completed, :value => @result.times_completed, :maxlength => 3 %> out of <%= @resolution.times %>
   <%= t.submit 'Save' %>
 <% end %>

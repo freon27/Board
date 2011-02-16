@@ -2,6 +2,7 @@
 .container {
     width: 710px;
     font-family: "Courier", "Tahoma", "Arial", "Verdana", sans-serif;
+    font-size: 14px;
     background-color: white;
     margin-top: 20px;
     padding: 20px;
@@ -37,9 +38,9 @@ input, textarea, select {
     padding: 5px;
 }
 
-input:focus, textarea:focus, select:focus {
-    background-color: #f6f6f6;
-}
+/*input:focus, textarea:focus, select:focus {*/
+/*    background-color: #f6f6f6;*/
+/*}*/
 
 nav {
   float: right;
@@ -71,3 +72,12 @@ p.central {
     width: 500px;
     margin: auto;
 }
+
+a:visited {
+    color: #222 !important;
+}
+
+a:hover {
+    background-color: #a9afac !important;
+}
+
